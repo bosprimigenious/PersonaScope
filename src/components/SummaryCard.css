@@ -1,0 +1,33 @@
+.summary-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+  border-color: var(--border-glow);
+}
+
+.summary-card h3 {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.summary-content {
+  color: var(--text-bright);
+}
+
+[data-theme="light"] .summary-card {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="light"] .summary-card:hover {
+  border-color: var(--primary);
+}
+

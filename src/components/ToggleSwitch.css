@@ -1,0 +1,99 @@
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--border);
+  border-radius: 28px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--panel), rgba(255, 255, 255, 0.1));
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.checked .toggle-slider {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.toggle-switch.checked .toggle-slider::before {
+  transform: translateX(20px);
+  background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.9));
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+}
+
+.toggle-switch:hover .toggle-slider {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.toggle-switch.checked:hover .toggle-slider {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+}
+
+.toggle-switch.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle-slider.animating::before {
+  animation: toggleBounce 0.3s ease;
+}
+
+@keyframes toggleBounce {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(10px) scale(0.9);
+  }
+}
+
+.toggle-switch.checked .toggle-slider.animating::before {
+  animation: toggleBounceChecked 0.3s ease;
+}
+
+@keyframes toggleBounceChecked {
+  0%, 100% {
+    transform: translateX(20px) scale(1);
+  }
+  50% {
+    transform: translateX(10px) scale(0.9);
+  }
+}
+
+[data-theme="light"] .toggle-slider {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .toggle-switch.checked .toggle-slider {
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+}
+

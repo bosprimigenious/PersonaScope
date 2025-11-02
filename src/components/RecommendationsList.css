@@ -1,0 +1,47 @@
+.recommendations-list {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.recommendations-list h3 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.recommendations-list ul {
+  margin: 0;
+  padding-left: 24px;
+  list-style: none;
+}
+
+.recommendations-list li {
+  padding: 12px 0;
+  padding-left: 24px;
+  position: relative;
+  color: var(--text);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--border);
+}
+
+.recommendations-list li:last-child {
+  border-bottom: none;
+}
+
+.recommendations-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+[data-theme="light"] .recommendations-list {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+

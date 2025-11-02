@@ -1,0 +1,72 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.badge:hover {
+  border-color: var(--border-glow);
+}
+
+.badge-small {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.badge-medium {
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.badge-large {
+  padding: 14px 20px;
+  font-size: 16px;
+}
+
+.badge-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--text-bright);
+  border-color: transparent;
+}
+
+.badge-success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: var(--text-bright);
+  border-color: transparent;
+}
+
+.badge-warning {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: var(--text-bright);
+  border-color: transparent;
+}
+
+.badge-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: var(--text-bright);
+  border-color: transparent;
+}
+
+.badge-icon {
+  flex-shrink: 0;
+}
+
+.badge-text {
+  color: inherit;
+}
+
+[data-theme="light"] .badge {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
