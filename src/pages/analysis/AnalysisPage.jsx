@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
+import SectionHeader from '../../components/SectionHeader';
+import VideoPlayer from '../../components/VideoPlayer';
+import StatCard from '../../components/StatCard';
+import HealthIcon from '../../components/HealthIcon';
 import './AnalysisPage.css';
 
 export default function AnalysisPage() {
@@ -8,6 +12,29 @@ export default function AnalysisPage() {
   const [cameraActive, setCameraActive] = useState(false);
   const [analysisData, setAnalysisData] = useState(null);
   const [emotionHistory, setEmotionHistory] = useState([]);
+  
+  // 测试视频列表 - 使用公开可用的示例视频
+  const testVideos = [
+    { 
+      id: 1, 
+      name: '标准情绪表达测试', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', 
+      description: '包含多种基本情绪表达的测试视频' 
+    },
+    { 
+      id: 2, 
+      name: '社交互动场景', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 
+      description: '模拟真实社交场景的互动视频' 
+    },
+    { 
+      id: 3, 
+      name: '压力反应测试', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', 
+      description: '测试压力环境下的情绪反应' 
+    },
+  ];
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
     if (cameraActive) {
@@ -166,62 +193,124 @@ export default function AnalysisPage() {
 
   return (
     <div className="analysis-page">
-      <div className="analysis-main">
-        <div className="analysis-video-panel">
-          <div className="panel-header">
-            <h2>实时视频流</h2>
-            <div className="actions">
-              {!cameraActive ? (
-                <button className="btn primary" onClick={startCamera}>启动分析</button>
-              ) : (
-                <button className="btn" onClick={stopCamera}>停止</button>
-              )}
+      <SectionHeader 
+        title="多模态AI实时分析" 
+        description="使用测试视频或摄像头进行实时情绪和MBTI分析"
+      />
+
+      <div className="analysis-layout">
+        {/* 左侧：测试视频 */}
+        <div className="analysis-left">
+          <div className="analysis-video-section">
+            <div className="video-section-header">
+              <h3>测试视频</h3>
+              <select 
+                className="video-select"
+                value={selectedVideo?.id || ''}
+                onChange={(e) => {
+                  const video = testVideos.find(v => v.id === parseInt(e.target.value));
+                  setSelectedVideo(video || null);
+                }}
+              >
+                <option value="">选择测试视频</option>
+                {testVideos.map(v => (
+                  <option key={v.id} value={v.id}>{v.name}</option>
+                ))}
+              </select>
             </div>
-          </div>
-          <div className="video-wrap">
-            <video ref={cameraVideoRef} className="video" autoPlay muted playsInline />
-            {analysisData && (
-              <div className="overlay-info">
-                <div className="emotion-badge">{analysisData.emotion}</div>
-                <div className="confidence-badge">置信度: {(analysisData.confidence * 100).toFixed(1)}%</div>
-              </div>
+            <VideoPlayer 
+              title={selectedVideo?.name}
+              src={selectedVideo?.src}
+            />
+            {selectedVideo && (
+              <p className="video-description">{selectedVideo.description}</p>
             )}
           </div>
         </div>
 
-        <div className="analysis-charts">
-          <div className="chart-panel">
-            <ReactECharts option={emotionChartOption} style={{ height: '250px' }} />
+        {/* 右侧：摄像头输入 */}
+        <div className="analysis-right">
+          <div className="analysis-camera-section">
+            <div className="camera-section-header">
+              <h3>实时摄像头</h3>
+              <div className="camera-actions">
+                {!cameraActive ? (
+                  <button className="btn primary" onClick={startCamera}>
+                    <HealthIcon type="video" size={18} />
+                    启动摄像头
+                  </button>
+                ) : (
+                  <button className="btn" onClick={stopCamera}>
+                    <HealthIcon type="security" size={18} />
+                    停止
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className="camera-video-wrap">
+              <video ref={cameraVideoRef} className="camera-video" autoPlay muted playsInline />
+              {!cameraActive && (
+                <div className="camera-placeholder">
+                  <HealthIcon type="video" size={64} />
+                  <p>点击"启动摄像头"开始实时分析</p>
+                </div>
+              )}
+              {analysisData && cameraActive && (
+                <div className="camera-overlay">
+                  <div className="emotion-badge">{analysisData.emotion}</div>
+                  <div className="confidence-badge">置信度: {(analysisData.confidence * 100).toFixed(1)}%</div>
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* 分析结果 */}
           {analysisData && (
-            <div className="chart-panel">
-              <ReactECharts option={mbtiChartOption} style={{ height: '300px' }} />
+            <div className="analysis-results">
+              <div className="results-stats">
+                <StatCard 
+                  label="当前情绪" 
+                  value={analysisData.emotion.toUpperCase()} 
+                  iconType="mood" 
+                  color="#10b981" 
+                />
+                <StatCard 
+                  label="MBTI预测" 
+                  value={
+                    `${analysisData.mbti.E > analysisData.mbti.I ? 'E' : 'I'}${
+                      analysisData.mbti.N > analysisData.mbti.S ? 'N' : 'S'}${
+                      analysisData.mbti.T > analysisData.mbti.F ? 'T' : 'F'}${
+                      analysisData.mbti.J > analysisData.mbti.P ? 'J' : 'P'}`
+                  } 
+                  iconType="ai" 
+                  color="#8b5cf6" 
+                />
+                <StatCard 
+                  label="置信度" 
+                  value={`${(analysisData.confidence * 100).toFixed(1)}%`} 
+                  iconType="target" 
+                  color="#f59e0b" 
+                />
+                <StatCard 
+                  label="更新时间" 
+                  value={analysisData.timestamp} 
+                  iconType="calendar" 
+                  color="#2563eb" 
+                />
+              </div>
+
+              <div className="results-charts">
+                <div className="chart-panel">
+                  <ReactECharts option={emotionChartOption} style={{ height: '300px' }} />
+                </div>
+                <div className="chart-panel">
+                  <ReactECharts option={mbtiChartOption} style={{ height: '350px' }} />
+                </div>
+              </div>
             </div>
           )}
         </div>
       </div>
-
-      {analysisData && (
-        <div className="analysis-details">
-          <div className="detail-card">
-            <h3>当前情绪</h3>
-            <div className="emotion-display">{analysisData.emotion.toUpperCase()}</div>
-          </div>
-          <div className="detail-card">
-            <h3>MBTI 预测</h3>
-            <div className="mbti-display">
-              {analysisData.mbti.E > analysisData.mbti.I ? 'E' : 'I'}
-              {analysisData.mbti.N > analysisData.mbti.S ? 'N' : 'S'}
-              {analysisData.mbti.T > analysisData.mbti.F ? 'T' : 'F'}
-              {analysisData.mbti.J > analysisData.mbti.P ? 'J' : 'P'}
-            </div>
-          </div>
-          <div className="detail-card">
-            <h3>更新时间</h3>
-            <div>{analysisData.timestamp}</div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
