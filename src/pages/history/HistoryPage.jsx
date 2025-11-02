@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SectionHeader from '../../components/SectionHeader';
 import './HistoryPage.css';
 
 export default function HistoryPage() {
@@ -15,9 +16,8 @@ export default function HistoryPage() {
 
   return (
     <div className="history-page">
-      <div className="history-header">
-        <h2>历史记录</h2>
-        <div className="filter-tabs">
+      <SectionHeader title="历史记录" />
+      <div className="filter-tabs">
           <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>全部</button>
           <button className={filter === '实时分析' ? 'active' : ''} onClick={() => setFilter('实时分析')}>实时分析</button>
           <button className={filter === '视频分析' ? 'active' : ''} onClick={() => setFilter('视频分析')}>视频分析</button>

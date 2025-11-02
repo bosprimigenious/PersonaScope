@@ -1,4 +1,7 @@
 import ReactECharts from 'echarts-for-react';
+import SectionHeader from '../../components/SectionHeader';
+import FeatureCard from '../../components/FeatureCard';
+import HealthIcon from '../../components/HealthIcon';
 import './TrajectoryPage.css';
 
 export default function TrajectoryPage() {
@@ -22,19 +25,21 @@ export default function TrajectoryPage() {
 
   return (
     <div className="trajectory-page">
-      <h2>个人成长轨迹</h2>
+      <SectionHeader title="个人成长轨迹" />
       <div className="trajectory-chart">
         <ReactECharts option={trajectoryOption} style={{ height: '400px' }} />
       </div>
       <div className="trajectory-insights">
-        <div className="insight-card">
-          <h3>📈 趋势分析</h3>
-          <p>你的MBTI倾向在过去两周内呈现稳定上升趋势，从65%提升到72%。</p>
-        </div>
-        <div className="insight-card">
-          <h3>😊 情绪状态</h3>
-          <p>情绪稳定性持续改善，目前达到85%的良好水平。</p>
-        </div>
+        <FeatureCard 
+          iconType="chart" 
+          title="趋势分析" 
+          description="你的MBTI倾向在过去两周内呈现稳定上升趋势，从65%提升到72%。" 
+        />
+        <FeatureCard 
+          iconType="mood" 
+          title="情绪状态" 
+          description="情绪稳定性持续改善，目前达到85%的良好水平。" 
+        />
       </div>
     </div>
   );
