@@ -1,19 +1,22 @@
 .analysis-page {
-  padding: 24px;
+  padding: 16px;
   scrollbar-gutter: stable;
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* 视频框容器 - 两个框在同一行，确保同时可见 */
 .analysis-videos-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 16px;
   margin-bottom: 24px;
   align-items: stretch;
   width: 100%;
+  max-width: 100%;
+  padding: 0;
 }
 
 .analysis-video-section,
@@ -21,12 +24,13 @@
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 24px;
+  padding: 16px;
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   min-height: 0;
   height: auto;
+  width: 100%;
 }
 
 /* 确保两个视频框高度一致 */
@@ -41,26 +45,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .video-section-header h3,
 .camera-section-header h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-bright);
+  white-space: nowrap;
 }
 
 .video-select {
-  padding: 8px 16px;
+  padding: 8px 12px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex: 1;
+  min-width: 150px;
+  max-width: 300px;
 }
 
 .video-select:hover {
@@ -114,10 +124,14 @@
   flex-direction: column;
 }
 
+.test-video-player {
+  width: 100%;
+}
+
 .test-video-player .video-player-wrapper {
   flex: 1;
-  min-height: 350px;
-  max-height: 450px;
+  min-height: calc(50vh - 100px);
+  width: 100%;
 }
 
 .camera-actions {
@@ -158,8 +172,7 @@
   border-radius: 12px;
   overflow: hidden;
   background: #000;
-  min-height: 350px;
-  max-height: 450px;
+  min-height: calc(50vh - 100px);
   flex: 1;
 }
 
@@ -412,8 +425,17 @@
   
   .test-video-player .video-player-wrapper,
   .camera-video-wrap {
-    min-height: 300px;
-    max-height: 400px;
+    min-height: calc(40vh - 80px);
+  }
+  
+  .video-section-header,
+  .camera-section-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .video-select {
+    max-width: 100%;
   }
 }
 

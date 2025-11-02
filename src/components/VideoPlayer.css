@@ -26,8 +26,7 @@
   border-radius: 12px;
   overflow: hidden;
   background: #000;
-  min-height: 350px;
-  max-height: 450px;
+  min-height: calc(50vh - 100px);
 }
 
 .video-player-video {
