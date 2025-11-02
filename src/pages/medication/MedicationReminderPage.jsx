@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import { showToast } from '../../Toast';
+import SectionHeader from '../../components/SectionHeader';
+import FormPanel from '../../components/FormPanel';
+import FormGroup from '../../components/FormGroup';
+import ListItem from '../../components/ListItem';
+import HealthIcon from '../../components/HealthIcon';
 import './MedicationReminderPage.css';
 
 export default function MedicationReminderPage() {
@@ -28,19 +33,27 @@ export default function MedicationReminderPage() {
 
   return (
     <div className="medication-page">
-      <div className="medication-header">
-        <h2>用药提醒</h2>
-        <button className="btn primary" onClick={() => setShowAddForm(!showAddForm)}>
-          {showAddForm ? '取消' : '+ 添加提醒'}
-        </button>
-      </div>
+      <SectionHeader 
+        title="用药提醒" 
+        actions={
+          <button className="btn primary" onClick={() => setShowAddForm(!showAddForm)}>
+            {showAddForm ? '取消' : '+ 添加提醒'}
+          </button>
+        }
+      />
 
       {showAddForm && (
-        <div className="medication-form-panel">
-          <h3>添加用药提醒</h3>
+        <FormPanel 
+          title="添加用药提醒"
+          actions={
+            <>
+              <button className="btn" onClick={() => setShowAddForm(false)}>取消</button>
+              <button className="btn primary" onClick={addMedication}>保存</button>
+            </>
+          }
+        >
           <div className="form-grid">
-            <div className="form-group">
-              <label>药物名称</label>
+            <FormGroup label="药物名称" required>
               <input
                 type="text"
                 className="input"
@@ -48,9 +61,8 @@ export default function MedicationReminderPage() {
                 value={newMed.name}
                 onChange={(e) => setNewMed({ ...newMed, name: e.target.value })}
               />
-            </div>
-            <div className="form-group">
-              <label>用量</label>
+            </FormGroup>
+            <FormGroup label="用量">
               <input
                 type="text"
                 className="input"
@@ -58,18 +70,16 @@ export default function MedicationReminderPage() {
                 value={newMed.dosage}
                 onChange={(e) => setNewMed({ ...newMed, dosage: e.target.value })}
               />
-            </div>
-            <div className="form-group">
-              <label>提醒时间</label>
+            </FormGroup>
+            <FormGroup label="提醒时间">
               <input
                 type="time"
                 className="input"
                 value={newMed.time}
                 onChange={(e) => setNewMed({ ...newMed, time: e.target.value })}
               />
-            </div>
-            <div className="form-group">
-              <label>频率</label>
+            </FormGroup>
+            <FormGroup label="频率">
               <select
                 className="input"
                 value={newMed.frequency}
@@ -79,31 +89,21 @@ export default function MedicationReminderPage() {
                 <option>每周</option>
                 <option>按需服用</option>
               </select>
-            </div>
+            </FormGroup>
           </div>
-          <button className="btn primary" onClick={addMedication}>保存</button>
-        </div>
+        </FormPanel>
       )}
 
       <div className="medication-list">
         {medications.map((med) => (
-          <div key={med.id} className="medication-item">
-            <div className="medication-icon">💊</div>
-            <div className="medication-info">
-              <div className="medication-name">{med.name}</div>
-              <div className="medication-details">
-                {med.dosage} · {med.time} · {med.frequency}
-              </div>
-            </div>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                checked={med.enabled}
-                onChange={() => toggleMedication(med.id)}
-              />
-              <span className="slider"></span>
-            </label>
-          </div>
+          <ListItem
+            key={med.id}
+            iconType="medication"
+            title={med.name}
+            details={`${med.dosage} · ${med.time} · ${med.frequency}`}
+            checked={med.enabled}
+            onToggle={(checked) => toggleMedication(med.id)}
+          />
         ))}
       </div>
     </div>

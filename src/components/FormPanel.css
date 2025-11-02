@@ -1,0 +1,33 @@
+.form-panel {
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.form-panel-title {
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.form-panel-content {
+  margin-bottom: 20px;
+}
+
+.form-panel-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+[data-theme="light"] .form-panel {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+

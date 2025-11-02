@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { showToast } from '../../Toast';
+import SectionHeader from '../../components/SectionHeader';
+import FormPanel from '../../components/FormPanel';
+import FormGroup from '../../components/FormGroup';
+import ListItem from '../../components/ListItem';
 import './AppointmentBookingPage.css';
 
 export default function AppointmentBookingPage() {
@@ -25,19 +29,27 @@ export default function AppointmentBookingPage() {
 
   return (
     <div className="appointment-page">
-      <div className="appointment-header">
-        <h2>预约咨询</h2>
-        <button className="btn primary" onClick={() => setShowBooking(!showBooking)}>
-          {showBooking ? '取消' : '+ 新建预约'}
-        </button>
-      </div>
+      <SectionHeader 
+        title="预约咨询"
+        actions={
+          <button className="btn primary" onClick={() => setShowBooking(!showBooking)}>
+            {showBooking ? '取消' : '+ 新建预约'}
+          </button>
+        }
+      />
 
       {showBooking && (
-        <div className="appointment-form-panel">
-          <h3>选择医生和时段</h3>
+        <FormPanel 
+          title="选择医生和时段"
+          actions={
+            <>
+              <button className="btn" onClick={() => setShowBooking(false)}>取消</button>
+              <button className="btn primary" onClick={bookAppointment}>确认预约</button>
+            </>
+          }
+        >
           <div className="form-grid">
-            <div className="form-group">
-              <label>科室</label>
+            <FormGroup label="科室">
               <select
                 className="input"
                 value={bookingForm.department}
@@ -46,9 +58,8 @@ export default function AppointmentBookingPage() {
                 <option value="">请选择科室</option>
                 {departments.map(d => <option key={d} value={d}>{d}</option>)}
               </select>
-            </div>
-            <div className="form-group">
-              <label>医生姓名</label>
+            </FormGroup>
+            <FormGroup label="医生姓名" required>
               <input
                 type="text"
                 className="input"
@@ -56,9 +67,8 @@ export default function AppointmentBookingPage() {
                 value={bookingForm.doctor}
                 onChange={(e) => setBookingForm({ ...bookingForm, doctor: e.target.value })}
               />
-            </div>
-            <div className="form-group">
-              <label>日期</label>
+            </FormGroup>
+            <FormGroup label="日期" required>
               <input
                 type="date"
                 className="input"
@@ -66,9 +76,8 @@ export default function AppointmentBookingPage() {
                 onChange={(e) => setBookingForm({ ...bookingForm, date: e.target.value })}
                 min={new Date().toISOString().split('T')[0]}
               />
-            </div>
-            <div className="form-group">
-              <label>时间</label>
+            </FormGroup>
+            <FormGroup label="时间" required>
               <select
                 className="input"
                 value={bookingForm.time}
@@ -77,29 +86,25 @@ export default function AppointmentBookingPage() {
                 <option value="">选择时间</option>
                 {timeSlots.map(t => <option key={t} value={t}>{t}</option>)}
               </select>
-            </div>
+            </FormGroup>
           </div>
-          <button className="btn primary" onClick={bookAppointment}>确认预约</button>
-        </div>
+        </FormPanel>
       )}
 
       <div className="appointment-list">
         <h3>我的预约 ({appointments.length})</h3>
-        {appointments.map((apt) => (
-          <div key={apt.id} className="appointment-item">
-            <div className="appointment-main">
-              <div className="appointment-doctor">👨‍⚕️ {apt.doctor}</div>
-              <div className="appointment-department">{apt.department}</div>
-            </div>
-            <div className="appointment-time">
-              <div>{apt.date}</div>
-              <div>{apt.time}</div>
-            </div>
-            <div className={`appointment-status ${apt.status === '已预约' ? 'confirmed' : ''}`}>
-              {apt.status}
-            </div>
-          </div>
-        ))}
+        <div className="appointment-items">
+          {appointments.map((apt) => (
+            <ListItem
+              key={apt.id}
+              iconType="hospital"
+              title={apt.doctor}
+              subtitle={apt.department}
+              details={`${apt.date} ${apt.time}`}
+              status={apt.status === '已预约' ? 'confirmed' : ''}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
