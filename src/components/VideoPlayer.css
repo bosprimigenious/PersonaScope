@@ -1,0 +1,118 @@
+.video-player {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.video-player-header {
+  margin-bottom: 16px;
+}
+
+.video-player-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.video-player-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  min-height: 400px;
+}
+
+.video-player-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-player-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--muted);
+}
+
+.video-player-placeholder svg {
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.video-player-placeholder p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.video-player-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.video-player-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--primary);
+  color: var(--text-bright);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.video-player-btn:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+.video-player-progress {
+  flex: 1;
+  cursor: pointer;
+}
+
+.video-player-progress-bar {
+  height: 6px;
+  background: var(--bg);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.video-player-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--purple));
+  transition: width 0.1s ease;
+  border-radius: 3px;
+}
+
+.video-player-time {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: right;
+}
+
+[data-theme="light"] .video-player {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+

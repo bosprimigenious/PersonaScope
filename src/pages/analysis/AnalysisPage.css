@@ -1,21 +1,207 @@
 .analysis-page {
-  padding: 20px;
+  padding: 24px;
   scrollbar-gutter: stable;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.analysis-main {
+.analysis-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   margin-bottom: 24px;
+  align-items: start;
 }
 
-.analysis-video-panel {
+.analysis-left,
+.analysis-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.analysis-video-section,
+.analysis-camera-section {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 24px;
   backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+.analysis-video-section {
+  height: fit-content;
+}
+
+.analysis-camera-section {
+  height: fit-content;
+}
+
+/* 确保两个视频框在同一行且高度一致 */
+.analysis-video-section,
+.analysis-camera-section {
+  align-self: start;
+}
+
+.video-section-header,
+.camera-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.video-section-header h3,
+.camera-section-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.video-select {
+  padding: 8px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.video-select:hover {
+  border-color: var(--primary);
+}
+
+.video-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.video-info {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.video-description {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.video-category {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="light"] .video-category {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: var(--primary-dark);
+}
+
+.test-video-player {
+  flex: 1;
+  min-height: 0;
+}
+
+.test-video-player .video-player-wrapper {
+  flex: 1;
+  min-height: 400px;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.camera-actions .btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.camera-actions .btn.primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--text-bright);
+  border: none;
+}
+
+.camera-actions .btn:hover {
+  border-color: var(--border-glow);
+  transform: scale(1.02);
+}
+
+.camera-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  min-height: 400px;
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--muted);
+}
+
+.camera-placeholder svg {
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.camera-placeholder p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.camera-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .panel-header {
@@ -99,7 +285,19 @@
   font-size: 12px;
 }
 
-.analysis-charts {
+.analysis-results {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.results-charts {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -199,8 +397,20 @@
   border: 1px solid rgba(59, 130, 246, 0.15);
 }
 
-@media (max-width: 900px) {
-  .analysis-main {
+[data-theme="light"] .analysis-video-section,
+[data-theme="light"] .analysis-camera-section,
+[data-theme="light"] .chart-panel {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="light"] .video-select {
+  background: rgba(249, 250, 251, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+@media (max-width: 1200px) {
+  .analysis-layout {
     grid-template-columns: 1fr;
   }
 }

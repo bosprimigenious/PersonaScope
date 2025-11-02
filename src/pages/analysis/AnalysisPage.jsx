@@ -13,25 +13,77 @@ export default function AnalysisPage() {
   const [analysisData, setAnalysisData] = useState(null);
   const [emotionHistory, setEmotionHistory] = useState([]);
   
-  // 测试视频列表 - 使用公开可用的示例视频
+  // 测试视频列表 - 使用公开可用的示例视频，包含多种类型和样式
   const testVideos = [
     { 
       id: 1, 
       name: '标准情绪表达测试', 
       src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', 
-      description: '包含多种基本情绪表达的测试视频' 
+      description: '包含多种基本情绪表达的测试视频',
+      category: '情绪识别'
     },
     { 
       id: 2, 
       name: '社交互动场景', 
       src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 
-      description: '模拟真实社交场景的互动视频' 
+      description: '模拟真实社交场景的互动视频',
+      category: '社交行为'
     },
     { 
       id: 3, 
       name: '压力反应测试', 
       src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', 
-      description: '测试压力环境下的情绪反应' 
+      description: '测试压力环境下的情绪反应',
+      category: '压力测试'
+    },
+    { 
+      id: 4, 
+      name: '快速情绪变化', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', 
+      description: '检测快速情绪变化的识别能力',
+      category: '情绪识别'
+    },
+    { 
+      id: 5, 
+      name: '长期观察测试', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', 
+      description: '长时间连续观察的情绪稳定性分析',
+      category: '稳定性测试'
+    },
+    { 
+      id: 6, 
+      name: '微表情识别', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', 
+      description: '识别细微表情变化的测试场景',
+      category: '微表情'
+    },
+    { 
+      id: 7, 
+      name: '群体互动分析', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4', 
+      description: '多人场景下的情绪和互动分析',
+      category: '社交行为'
+    },
+    { 
+      id: 8, 
+      name: '专注度测试', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', 
+      description: '测试在不同内容下的专注度表现',
+      category: '注意力'
+    },
+    { 
+      id: 9, 
+      name: '动态场景适应', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4', 
+      description: '快速变化的动态场景情绪反应',
+      category: '适应性'
+    },
+    { 
+      id: 10, 
+      name: '静态观察测试', 
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4', 
+      description: '静态画面下的情绪状态评估',
+      category: '静态分析'
     },
   ];
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -213,17 +265,25 @@ export default function AnalysisPage() {
                 }}
               >
                 <option value="">选择测试视频</option>
-                {testVideos.map(v => (
-                  <option key={v.id} value={v.id}>{v.name}</option>
+                {Array.from(new Set(testVideos.map(v => v.category))).map(category => (
+                  <optgroup key={category} label={category}>
+                    {testVideos.filter(v => v.category === category).map(v => (
+                      <option key={v.id} value={v.id}>{v.name}</option>
+                    ))}
+                  </optgroup>
                 ))}
               </select>
             </div>
             <VideoPlayer 
               title={selectedVideo?.name}
               src={selectedVideo?.src}
+              className="test-video-player"
             />
             {selectedVideo && (
-              <p className="video-description">{selectedVideo.description}</p>
+              <div className="video-info">
+                <p className="video-description">{selectedVideo.description}</p>
+                <span className="video-category">{selectedVideo.category}</span>
+              </div>
             )}
           </div>
         </div>
