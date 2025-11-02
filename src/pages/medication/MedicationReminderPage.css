@@ -1,9 +1,44 @@
 .medication-page {
-  padding: 32px 60px;
-  max-width: 100%;
-  margin: 0 auto;
-  width: 100%;
+  padding: 24px;
   scrollbar-gutter: stable;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.medication-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.medication-filters {
+  margin-bottom: 24px;
+}
+
+.medication-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--muted);
+}
+
+.empty-state svg {
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.empty-state p {
+  margin: 0 0 24px;
+  font-size: 16px;
 }
 
 @media (min-width: 1600px) {
