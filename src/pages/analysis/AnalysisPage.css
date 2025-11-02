@@ -6,19 +6,14 @@
   width: 100%;
 }
 
-.analysis-layout {
+/* 视频框容器 - 两个框在同一行，确保同时可见 */
+.analysis-videos-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   margin-bottom: 24px;
-  align-items: start;
-}
-
-.analysis-left,
-.analysis-right {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  align-items: stretch;
+  width: 100%;
 }
 
 .analysis-video-section,
@@ -31,21 +26,14 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
-  height: 100%;
+  height: auto;
 }
 
-.analysis-video-section {
-  height: fit-content;
-}
-
-.analysis-camera-section {
-  height: fit-content;
-}
-
-/* 确保两个视频框在同一行且高度一致 */
+/* 确保两个视频框高度一致 */
 .analysis-video-section,
 .analysis-camera-section {
-  align-self: start;
+  flex: 1;
+  align-self: stretch;
 }
 
 .video-section-header,
@@ -122,11 +110,14 @@
 .test-video-player {
   flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .test-video-player .video-player-wrapper {
   flex: 1;
-  min-height: 400px;
+  min-height: 350px;
+  max-height: 450px;
 }
 
 .camera-actions {
@@ -167,7 +158,9 @@
   border-radius: 12px;
   overflow: hidden;
   background: #000;
-  min-height: 400px;
+  min-height: 350px;
+  max-height: 450px;
+  flex: 1;
 }
 
 .camera-video {
@@ -289,6 +282,8 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-top: 24px;
+  width: 100%;
 }
 
 .results-stats {
@@ -409,9 +404,16 @@
   border: 1px solid rgba(59, 130, 246, 0.15);
 }
 
-@media (max-width: 1200px) {
-  .analysis-layout {
+/* 响应式：小屏幕时改为单列布局 */
+@media (max-width: 1024px) {
+  .analysis-videos-container {
     grid-template-columns: 1fr;
+  }
+  
+  .test-video-player .video-player-wrapper,
+  .camera-video-wrap {
+    min-height: 300px;
+    max-height: 400px;
   }
 }
 
