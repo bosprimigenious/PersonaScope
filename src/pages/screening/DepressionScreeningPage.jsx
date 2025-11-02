@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SectionHeader from '../../components/SectionHeader';
-import SummaryCard from '../../components/SummaryCard';
+import QuestionCard from '../../components/QuestionCard';
+import ResultCard from '../../components/ResultCard';
 import './DepressionScreeningPage.css';
 
 export default function DepressionScreeningPage() {
@@ -54,69 +55,60 @@ export default function DepressionScreeningPage() {
       {!submitted ? (
         <div className="questionnaire">
           {phq9Questions.map((q, i) => (
-            <div key={i} className="question-item">
-              <div className="question-text">
-                {i + 1}. {q}
-              </div>
-              <div className="answer-options">
-                {[0, 1, 2, 3].map((val) => (
-                  <label key={val} className="radio-label">
-                    <input
-                      type="radio"
-                      name={`q${i}`}
-                      value={val}
-                      checked={answers[i] === val}
-                      onChange={(e) => handleAnswer(i, e.target.value)}
-                    />
-                    <span>
-                      {val === 0 && '完全没有'}
-                      {val === 1 && '好几天'}
-                      {val === 2 && '一半以上时间'}
-                      {val === 3 && '几乎每天'}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
+            <QuestionCard
+              key={i}
+              question={q}
+              index={i}
+              options={[
+                { value: 0, label: '完全没有' },
+                { value: 1, label: '好几天' },
+                { value: 2, label: '一半以上时间' },
+                { value: 3, label: '几乎每天' },
+              ]}
+              selectedValue={answers[i]}
+              onSelect={handleAnswer}
+              required={true}
+            />
           ))}
-          <button className="btn primary large" onClick={calculateScore}>
-            提交评估
-          </button>
+          <div className="questionnaire-actions">
+            <button className="btn primary large" onClick={calculateScore}>
+              提交评估
+            </button>
+          </div>
         </div>
       ) : (
         <div className="screening-results">
-          <SummaryCard title="评估结果">
-            <div className="score-display">
-              <div className="score-value">{score}</div>
-              <div className="score-label">总分 (0-27)</div>
-            </div>
-            <div className="severity-badge" style={{ backgroundColor: severityColors[severity] + '20', color: severityColors[severity] }}>
-              严重程度: {severity}
-            </div>
-            <div className="result-interpretation">
-              {severity === '无或轻微' && (
-                <p>你的抑郁症状非常轻微。继续保持健康的生活方式，定期进行心理健康检查。</p>
-              )}
-              {severity === '轻度' && (
-                <p>你可能有轻度抑郁症状。建议增加运动、改善睡眠、保持社交活动。如症状持续，考虑咨询心理健康专业人士。</p>
-              )}
-              {severity === '中度' && (
-                <p>你可能存在中度抑郁症状。强烈建议咨询心理健康专业人士进行评估和治疗。可以尝试认知行为疗法(CBT)或咨询精神科医生。</p>
-              )}
-              {(severity === '中重度' || severity === '重度') && (
-                <p>
-                  <strong>你的症状较为严重，强烈建议立即寻求专业帮助。</strong>
-                  <br />
-                  请联系：精神科医生、心理咨询师或拨打心理健康热线。
-                  <br />
-                  不要独自承受，专业的治疗可以显著改善你的状况。
-                </p>
-              )}
-            </div>
-            <button className="btn" onClick={() => { setSubmitted(false); setAnswers({}); setScore(0); }}>
-              重新评估
-            </button>
-          </div>
+          <ResultCard
+            title="评估结果"
+            score={score}
+            maxScore={27}
+            severity={`严重程度: ${severity}`}
+            severityColor={severityColors[severity]}
+            actions={
+              <button className="btn" onClick={() => { setSubmitted(false); setAnswers({}); setScore(0); }}>
+                重新评估
+              </button>
+            }
+          >
+            {severity === '无或轻微' && (
+              <p>你的抑郁症状非常轻微。继续保持健康的生活方式，定期进行心理健康检查。</p>
+            )}
+            {severity === '轻度' && (
+              <p>你可能有轻度抑郁症状。建议增加运动、改善睡眠、保持社交活动。如症状持续，考虑咨询心理健康专业人士。</p>
+            )}
+            {severity === '中度' && (
+              <p>你可能存在中度抑郁症状。强烈建议咨询心理健康专业人士进行评估和治疗。可以尝试认知行为疗法(CBT)或咨询精神科医生。</p>
+            )}
+            {(severity === '中重度' || severity === '重度') && (
+              <p>
+                <strong>你的症状较为严重，强烈建议立即寻求专业帮助。</strong>
+                <br />
+                请联系：精神科医生、心理咨询师或拨打心理健康热线。
+                <br />
+                不要独自承受，专业的治疗可以显著改善你的状况。
+              </p>
+            )}
+          </ResultCard>
         </div>
       )}
     </div>
