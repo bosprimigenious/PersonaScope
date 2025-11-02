@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import SectionHeader from '../../components/SectionHeader';
+import FilterTabs from '../../components/FilterTabs';
 import './HistoryPage.css';
 
 export default function HistoryPage() {
@@ -17,12 +18,15 @@ export default function HistoryPage() {
   return (
     <div className="history-page">
       <SectionHeader title="历史记录" />
-      <div className="filter-tabs">
-          <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>全部</button>
-          <button className={filter === '实时分析' ? 'active' : ''} onClick={() => setFilter('实时分析')}>实时分析</button>
-          <button className={filter === '视频分析' ? 'active' : ''} onClick={() => setFilter('视频分析')}>视频分析</button>
-        </div>
-      </div>
+      <FilterTabs
+        filters={[
+          { value: 'all', label: '全部' },
+          { value: '实时分析', label: '实时分析' },
+          { value: '视频分析', label: '视频分析' },
+        ]}
+        activeFilter={filter}
+        onFilterChange={setFilter}
+      />
 
       <div className="history-list">
         {filteredHistory.map((item) => (

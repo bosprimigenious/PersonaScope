@@ -1,8 +1,21 @@
 .screening-page {
-  padding: 20px;
+  padding: 24px;
   scrollbar-gutter: stable;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+}
+
+.questionnaire {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.questionnaire-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
 }
 
 .screening-header {
