@@ -1,0 +1,61 @@
+.trajectory-page {
+  padding: 20px;
+  scrollbar-gutter: stable;
+}
+
+.trajectory-page h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.trajectory-chart {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.trajectory-insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.insight-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+  border-color: var(--border-glow);
+}
+
+.insight-card h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.insight-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+[data-theme="light"] .trajectory-chart,
+[data-theme="light"] .insight-card {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+@media (max-width: 900px) {
+  .trajectory-insights {
+    grid-template-columns: 1fr;
+  }
+}
+

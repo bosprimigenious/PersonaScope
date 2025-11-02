@@ -1,0 +1,173 @@
+.pathology-page {
+  padding: 20px;
+  scrollbar-gutter: stable;
+}
+
+.pathology-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.pathology-header h2 {
+  margin: 0 0 8px;
+}
+
+.pathology-header p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.pathology-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.symptoms-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.symptoms-panel h3 {
+  margin: 0 0 20px;
+}
+
+.symptoms-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--panel);
+}
+
+.checkbox-label:hover {
+  border-color: var(--primary);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.checkbox-label input {
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.checkbox-label:has(input:checked) {
+  border-color: var(--primary);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+}
+
+.btn:hover:not(:disabled) {
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.analysis-results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.risk-indicator {
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.risk-indicator h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.treatment-plan {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.treatment-plan h3 {
+  margin: 0 0 16px;
+}
+
+.treatment-plan ul {
+  margin: 0;
+  padding-left: 24px;
+  line-height: 2;
+}
+
+.clinical-notes {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.clinical-notes h3 {
+  margin: 0 0 12px;
+}
+
+.clinical-notes h4 {
+  margin: 16px 0 8px;
+}
+
+.clinical-notes ul {
+  margin: 0;
+  padding-left: 24px;
+  line-height: 1.8;
+}
+
+.resources {
+  margin-top: 16px;
+}
+
+[data-theme="light"] .symptoms-panel,
+[data-theme="light"] .treatment-plan,
+[data-theme="light"] .clinical-notes {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+@media (max-width: 900px) {
+  .pathology-content {
+    grid-template-columns: 1fr;
+  }
+}
+

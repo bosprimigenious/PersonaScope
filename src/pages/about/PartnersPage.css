@@ -1,0 +1,572 @@
+.partners-page {
+  padding: 24px;
+  scrollbar-gutter: stable;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.partners-hero {
+  text-align: center;
+  padding: 48px 24px;
+  margin-bottom: 48px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.12));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+}
+
+.partners-hero h1 {
+  margin: 0 0 16px;
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-glow), var(--purple-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.partners-hero p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* 统计概览 */
+.stats-section {
+  margin-bottom: 48px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--border-glow);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* 认证与资质 */
+.certifications-section {
+  margin-bottom: 48px;
+}
+
+.certifications-section h2 {
+  margin: 0 0 24px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.cert-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.cert-card:hover {
+  border-color: var(--border-glow);
+}
+
+.cert-icon {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.cert-type {
+  font-size: 14px;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.cert-number {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: 'Courier New', monospace;
+}
+
+/* 成果展示 */
+.achievements-section {
+  margin-bottom: 48px;
+}
+
+.achievements-section h2 {
+  margin: 0 0 24px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.achievements-timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.achievements-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--purple));
+}
+
+.achievement-item {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 32px;
+}
+
+.achievement-item::before {
+  content: '';
+  position: absolute;
+  left: -25px;
+  top: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid var(--panel);
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.achievement-year {
+  position: absolute;
+  left: -80px;
+  top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  width: 50px;
+  text-align: right;
+}
+
+.achievement-content {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.achievement-content:hover {
+  border-color: var(--border-glow);
+}
+
+.achievement-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.achievement-text h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.achievement-text p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* 合作机构 */
+.partners-tabs {
+  margin-bottom: 48px;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-button:hover {
+  color: var(--primary);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.tab-button.active {
+  color: var(--primary);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px 2px 0 0;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.partner-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.partner-card:hover {
+  border-color: var(--border-glow);
+}
+
+.partner-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.partner-logo {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.partner-info {
+  flex: 1;
+}
+
+.partner-info h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.partner-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge.level {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--primary);
+}
+
+.badge.location {
+  background: rgba(139, 92, 246, 0.2);
+  color: var(--purple);
+}
+
+.partner-description {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.partner-details {
+  margin-bottom: 16px;
+}
+
+.detail-item {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.detail-item strong {
+  color: var(--primary);
+  margin-right: 8px;
+}
+
+.partner-achievements {
+  margin-bottom: 16px;
+  padding: 16px;
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 8px;
+}
+
+.partner-achievements strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--primary);
+  font-size: 14px;
+}
+
+.partner-achievements ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.partner-achievements li {
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.partner-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.partner-link:hover {
+  color: var(--primary-glow);
+  transform: translateX(4px);
+}
+
+/* 科研论文 */
+.papers-section {
+  margin-bottom: 48px;
+}
+
+.papers-section h2 {
+  margin: 0 0 24px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.papers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.paper-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.paper-item:hover {
+  box-shadow: 0 6px 30px var(--shadow-glow);
+}
+
+.paper-journal {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--primary);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.paper-item h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.paper-authors {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.paper-abstract {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.paper-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.paper-link:hover {
+  color: var(--primary-glow);
+}
+
+/* 合作申请 */
+.cooperation-section {
+  margin-bottom: 48px;
+}
+
+.cooperation-card {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  text-align: center;
+}
+
+.cooperation-card h2 {
+  margin: 0 0 16px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.cooperation-card p {
+  margin: 0 0 32px;
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.cooperation-contacts {
+  margin-bottom: 32px;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-item {
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.contact-item strong {
+  color: var(--primary);
+  margin-right: 8px;
+}
+
+.btn-cooperation {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--text-bright);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cooperation:hover {
+  border-color: var(--border-glow);
+}
+
+[data-theme="light"] .partner-card,
+[data-theme="light"] .cert-card,
+[data-theme="light"] .stat-card,
+[data-theme="light"] .paper-item,
+[data-theme="light"] .achievement-content {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+@media (max-width: 768px) {
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .achievement-year {
+    position: static;
+    margin-bottom: 8px;
+  }
+  .achievements-timeline {
+    padding-left: 0;
+  }
+  .achievements-timeline::before {
+    display: none;
+  }
+  .achievement-item::before {
+    display: none;
+  }
+}
+
